@@ -29,7 +29,7 @@ export default class DisciplinasController {
         const id = request.param('id')
         const disciplina = await Disciplina.findOrFail(id)
 
-        const dados = request.only(['nome', 'curdoId'])
+        const dados = request.only(['nome', 'cursoId'])
 
         disciplina.merge(dados)
         return disciplina.save()
