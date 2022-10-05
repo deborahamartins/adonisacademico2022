@@ -26,5 +26,14 @@ Route.get('/', async () => {
 
 Route.resource('/cursos', 'CursosController').apiOnly()
 Route.resource('/disciplinas', 'DisciplinasController').apiOnly()
+Route.resource('/salas', 'SalasController').apiOnly()
+Route.resource('/semestres', 'SemestresController').apiOnly()
+Route.resource('/professores', 'ProfessorsController').apiOnly()
+Route.resource('/aulas', 'AulasController').apiOnly()
+Route.resource('/turmas', 'TurmasController').apiOnly()
+Route.resource('/alunos', 'AlunosController').apiOnly()
+Route.resource('/turma_alunos', 'TurmaAlunosController').apiOnly()
+Route.resource('/chamadas', 'ChamadasController').apiOnly()
+
 
 Route.get('/deborah/:id/:nome', 'CursosController.deborah')
