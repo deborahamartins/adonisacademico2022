@@ -35,6 +35,6 @@ export default class CursosController {
         const dados = request.only(['nome', 'duracao', 'modalidade'])
 
         curso.merge(dados)
-        return curso
+        return curso.save()
     }
 }

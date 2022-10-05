@@ -24,7 +24,13 @@ export default class AlunosController {
 
     }
 
-    update({request}) {
+    async update({request}) {
+        const id = request.param('id')
+        const aluno = await Aluno.findOrFail(id)
 
+        const dados = request.only(['nome', 'cpf', 'matricula', 'email', 'telefone', 'cep', 'logradouro', 'complemento', 'numero', 'bairro'])
+
+        aluno.merge(dados)
+        return aluno.save()
     }
 }

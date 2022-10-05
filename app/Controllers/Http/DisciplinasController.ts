@@ -25,7 +25,13 @@ export default class DisciplinasController {
 
     }
 
-    update({request}) {
+    async update({request}) {
+        const id = request.param('id')
+        const disciplina = await Disciplina.findOrFail(id)
 
+        const dados = request.only(['nome', 'curdoId'])
+
+        disciplina.merge(dados)
+        return disciplina.save()
     }
 }

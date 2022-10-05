@@ -24,7 +24,13 @@ export default class SemestresController {
 
     }
 
-    update({request}) {
+    async update({request}) {
+        const id = request.param('id')
+        const semestre = await Semestre.findOrFail(id)
 
+        const dados = request.only(['nome', 'dataInicio', 'dataFim'])
+
+        semestre.merge(dados)
+        return semestre.save()
     }
 }

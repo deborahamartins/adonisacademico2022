@@ -24,7 +24,13 @@ export default class TurmaAlunosController {
 
     }
 
-    update({request}) {
+    async update({request}) {
+        const id = request.param('id')
+        const turmaAluno = await TurmaAluno.findOrFail(id)
 
+        const dados = request.only(['turmasId', 'alunosId'])
+
+        turmaAluno.merge(dados)
+        return turmaAluno.save()
     }
 }
