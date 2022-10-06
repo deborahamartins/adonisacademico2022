@@ -9,7 +9,7 @@ export default class DisciplinasController {
     }
 
     store({request}){
-        const dados = request.only(['nome', 'curdoId'])
+        const dados = request.only(['nome', 'cursoId'])
         return Disciplina.create(dados)
     }
 
