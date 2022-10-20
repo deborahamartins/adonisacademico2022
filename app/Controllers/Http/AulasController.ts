@@ -4,7 +4,7 @@ import Aula from "App/Models/Aula"
 
 export default class AulasController {
     index(){
-        return Aula.all()
+        return Aula.query().preload('alunos')
     }
 
     store({request}){

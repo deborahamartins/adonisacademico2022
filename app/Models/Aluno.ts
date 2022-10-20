@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, HasMany, hasMany, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 import Turma from './Turma'
-import Chamada from './Chamada'
+import Aula from './Aula'
 
 export default class Aluno extends BaseModel {
   @column({ isPrimary: true })
@@ -47,9 +47,8 @@ export default class Aluno extends BaseModel {
     pivotTable: 'turma_alunos'})
   public turmas: ManyToMany<typeof Turma>
 
-  @hasMany( () =>Chamada, {
-    foreignKey: 'alunosId'
-  } )
-  public chamadas: HasMany<typeof Chamada>
+  @manyToMany(() => Aula, {
+    pivotTable: 'chamadas'})
+  public aulas: ManyToMany<typeof Aula>
 
 }

@@ -4,7 +4,7 @@ import Semestre from "App/Models/Semestre"
 
 export default class SemestresController {
     index(){
-        return Semestre.all()
+        return Semestre.query().preload('turmas')
     }
 
     store({request}){
