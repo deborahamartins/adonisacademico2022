@@ -4,9 +4,9 @@ import Aluno from "App/Models/Aluno"
 
 export default class AlunosController {
     index(){
-        return Aluno.all()
+        return Aluno.query().preload('chamadas').preload('turmas')
     }
-
+   
     store({request}){
         const dados = request.only(['nome', 'cpf', 'matricula', 'email', 'telefone', 'cep', 'logradouro', 'complemento', 'numero', 'bairro'])
         return Aluno.create(dados)

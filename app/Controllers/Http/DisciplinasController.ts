@@ -5,7 +5,7 @@ import Disciplina from "App/Models/Disciplina";
 export default class DisciplinasController {
 
     index(){
-        return Disciplina.all()
+        return Disciplina.query().preload('turmas')
     }
 
     store({request}){

@@ -4,12 +4,12 @@ import TurmaAluno from 'App/Models/TurmaAluno'
 export default class extends BaseSeeder {
   public async run () {
     await TurmaAluno.createMany([
-      {turmasId: 2, alunosId: 3},
-      {turmasId: 1, alunosId: 4},
-      {turmasId: 3, alunosId: 3},
-      {turmasId: 4, alunosId: 1},
-      {turmasId: 2, alunosId: 1},
-      {turmasId: 2, alunosId: 2}
+      {turmaId: 2, alunoId: 3},
+      {turmaId: 1, alunoId: 4},
+      {turmaId: 3, alunoId: 3},
+      {turmaId: 4, alunoId: 1},
+      {turmaId: 2, alunoId: 1},
+      {turmaId: 2, alunoId: 2}
     ])
   }
 }

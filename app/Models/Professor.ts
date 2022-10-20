@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import Turma from './Turma'
 
 export default class Professor extends BaseModel {
 
@@ -46,4 +47,7 @@ public static table = 'professores'
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @hasMany( ()=>Turma )
+  public turma: HasMany<typeof Turma>
 }

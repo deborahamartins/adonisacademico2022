@@ -8,8 +8,9 @@ export default class CursosController {
         const {nome, duracao, modalidade} = request.all()
 
         const cursos = Curso.query()
-                                    .select('id', 'nome', 'duracao', 'modalidade')
-        
+                            .select('id', 'nome', 'duracao', 'modalidade')
+                            .preload('disciplinas')
+                            
         if(nome){
             cursos.where('nome', nome)
         }
