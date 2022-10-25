@@ -5,7 +5,7 @@ import Disciplina from "App/Models/Disciplina";
 export default class DisciplinasController {
 
     index(){
-        return Disciplina.query().preload('turmas')
+        return Disciplina.query().preload('turmas').paginate(1, 2)
     }
 
     store({request}){

@@ -17,7 +17,7 @@ export default class CursosController {
         if(modalidade) {
             cursos.where('modalidade', modalidade)
         }
-
+                
         return cursos
     }
 
