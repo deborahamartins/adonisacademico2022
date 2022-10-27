@@ -1,14 +1,15 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import Turma from "App/Models/Turma"
+import TurmaValidator from "App/Validators/TurmaValidator"
 
 export default class TurmasController {
     index(){
         return Turma.query().preload('aulas').preload('alunos')
     }
 
-    store({request}){
-        const dados = request.only(['nome', 'professorId', 'semestreId', 'disciplinaId', 'salaId', 'turno'])
+    async store({request}){
+        const dados = await request.validate(TurmaValidator)
         return Turma.create(dados)
     }
 
