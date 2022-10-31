@@ -1,4 +1,4 @@
-import { schema, CustomMessages } from '@ioc:Adonis/Core/Validator'
+import { schema, CustomMessages, rules } from '@ioc:Adonis/Core/Validator'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class SemestreValidator {
@@ -24,9 +24,20 @@ export default class SemestreValidator {
    *    ```
    */
   public schema = schema.create({
-    nome: schema.string(),
-    dataInicio: schema.date(),
-    dataFim: schema.date(),
+    nome: schema.string([
+      rules.alphaNum({allow: ['space']}),
+      rules.maxLength(30)
+    ]),
+    dataInicio: schema.date({
+      format:'iso'
+    }, [
+      rules.beforeField('dataFim')
+    ]),
+    dataFim: schema.date({
+      format: 'iso'
+    }, [
+      rules.afterField('dataInicio')
+    ]),
   })
 
   /**

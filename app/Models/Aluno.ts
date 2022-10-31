@@ -11,7 +11,7 @@ export default class Aluno extends BaseModel {
   public nome: string
 
   @column()
-  public cpf: number
+  public cpf: string
 
   @column()
   public matricula: string
@@ -23,7 +23,7 @@ export default class Aluno extends BaseModel {
   public telefone: string
 
   @column()
-  public cep: number
+  public cep: string
 
   @column()
   public logradouro: string

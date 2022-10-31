@@ -1,4 +1,4 @@
-import { schema, CustomMessages } from '@ioc:Adonis/Core/Validator'
+import { schema, CustomMessages, rules } from '@ioc:Adonis/Core/Validator'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class AulaValidator {
@@ -24,9 +24,13 @@ export default class AulaValidator {
    *    ```
    */
   public schema = schema.create({
-    data: schema.date(),
+    data: schema.date({
+      format: 'iso',
+    }),
     conteudo: schema.string(),
-    turmaId: schema.string(),
+    turmaId: schema.string.optional([
+      rules.exists({ table: 'turmas', column: 'id' })
+    ]),
   })
 
   /**

@@ -1,4 +1,4 @@
-import { schema, CustomMessages } from '@ioc:Adonis/Core/Validator'
+import { schema, CustomMessages, rules } from '@ioc:Adonis/Core/Validator'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class CursoValidator {
@@ -24,11 +24,19 @@ export default class CursoValidator {
    *    ```
    */
   public schema = schema.create({
-    nome: schema.string(),
-    duracao: schema.number.optional(),
-    modalidade: schema.string(),
+    nome: schema.string([
+      rules.alpha({allow: ['space']}),
+      rules.maxLength(50)
+    ]),
+    duracao: schema.number.optional([
+      rules.range(1,4)
+    ]),
+    modalidade: schema.string([
+      rules.minLength(1),
+      rules.maxLength(1),
+    ]),
   })
-
+ 
   /**
    * Custom messages for validation failures. You can make use of dot notation `(.)`
    * for targeting nested fields and array expressions `(*)` for targeting all
@@ -40,5 +48,11 @@ export default class CursoValidator {
    * }
    *
    */
-  public messages: CustomMessages = {}
+  public messages: CustomMessages = {
+    'nome.maxLength': 'O nome só pode ter no máximo {{ options.maxLength }} caracteres',
+    'duracao.range': 'A duração do curso deve estar entre {{ options.start }} e {{ options.stop }} horas',
+    'modalidade.maxLength': 'A modalidade só pode ter no máximo {{ options.maxLength }} caracter',
+    'modalidade.minLength': 'A modalidade só pode ter no mínimo {{ options.minLength }} caracter',
+  }
 }
+

@@ -1,4 +1,4 @@
-import { schema, CustomMessages } from '@ioc:Adonis/Core/Validator'
+import { schema, CustomMessages, rules } from '@ioc:Adonis/Core/Validator'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class ProfessorValidator {
@@ -24,17 +24,48 @@ export default class ProfessorValidator {
    *    ```
    */
   public schema = schema.create({
-    nome: schema.string(),
-    cpf: schema.number(),
-    matricula: schema.string.optional(),
-    salario: schema.number.optional(),
-    email: schema.string.optional(),
-    telefone: schema.string.optional(),
-    cep: schema.number.optional(),
-    logradouro: schema.string.optional(),
-    complemento: schema.string.optional(),
-    numero: schema.string.optional(),
-    bairro: schema.string.optional(),
+    nome: schema.string([
+      rules.alpha({allow: ['space']}),
+      rules.maxLength(100)
+    ]),
+    cpf: schema.string([
+      rules.minLength(15),
+      rules.maxLength(15),
+      rules.unique({ table: 'professores', column: 'cpf' })
+    ]),
+    matricula: schema.string.optional([
+      rules.maxLength(20),
+      rules.unique({ table: 'professores', column: 'matricula' })
+    ]),
+    salario: schema.number.optional([
+      rules.range(1200, 5000)
+    ]),
+    email: schema.string.optional([
+      rules.email(),
+      rules.maxLength(100)
+    ]),
+    telefone: schema.string.optional([
+      rules.mobile({
+        locale: ['pt-BR']
+      }),
+      rules.maxLength(15)
+    ]),
+    cep: schema.string.optional([
+      rules.minLength(9),
+      rules.maxLength(9),
+    ]),
+    logradouro: schema.string.optional([
+      rules.maxLength(100)
+    ]),
+    complemento: schema.string.optional([
+      rules.maxLength(100)
+    ]),
+    numero: schema.string.optional([
+      rules.maxLength(20)
+    ]),
+    bairro: schema.string.optional([
+      rules.maxLength(100)
+    ]),
   })
 
   /**

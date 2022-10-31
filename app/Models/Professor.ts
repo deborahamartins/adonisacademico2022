@@ -13,7 +13,7 @@ public static table = 'professores'
   public nome: string
 
   @column()
-  public cpf: number
+  public cpf: string
 
   @column()
   public matricula: string
@@ -28,7 +28,7 @@ public static table = 'professores'
   public telefone: string
 
   @column()
-  public cep: number
+  public cep: string
 
   @column()
   public logradouro: string
