@@ -31,9 +31,8 @@ export default class CursoValidator {
     duracao: schema.number.optional([
       rules.range(1,4)
     ]),
-    modalidade: schema.string([
-      rules.minLength(1),
-      rules.maxLength(1),
+    modalidade: schema.enum([
+      'P', 'E', 'H'
     ]),
   })
  
