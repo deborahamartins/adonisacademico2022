@@ -24,7 +24,9 @@ Route.get('/', async () => {
   return { hello: 'world' }
 })
 
-Route.resource('/cursos', 'CursosController').apiOnly()
+
+Route.group(() => {
+  Route.resource('/cursos', 'CursosController').apiOnly()
 Route.resource('/disciplinas', 'DisciplinasController').apiOnly()
 Route.resource('/salas', 'SalasController').apiOnly()
 Route.resource('/semestres', 'SemestresController').apiOnly()
@@ -34,6 +36,12 @@ Route.resource('/turmas', 'TurmasController').apiOnly()
 Route.resource('/alunos', 'AlunosController').apiOnly()
 Route.resource('/turma_alunos', 'TurmaAlunosController').apiOnly()
 Route.resource('/chamadas', 'ChamadasController').apiOnly()
+  
+}).middleware('auth')
+
+
+Route.post('/users', 'UsersController.store').middleware('auth')
+Route.post('/login', 'UsersController.login')
 
 
 Route.get('/deborah/:id/:nome', 'CursosController.deborah')
